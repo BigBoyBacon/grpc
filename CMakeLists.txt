@@ -39,6 +39,15 @@ if(BUILD_SHARED_LIBS AND MSVC)
   set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS ON)
 endif()
 
+
+#设置安装位置
+# 获取当前CMakeLists.txt所在目录的上两级目录
+get_filename_component(PARENT_DIR ${CMAKE_CURRENT_LIST_DIR} DIRECTORY)
+get_filename_component(GRANDPARENT_DIR ${PARENT_DIR} DIRECTORY)
+# 设置安装目录为上两级目录下的install文件夹
+set(CMAKE_INSTALL_PREFIX "${GRANDPARENT_DIR}/3dParty/install/${PROJECT_NAME}" CACHE PATH "Install path prefix" FORCE)
+message(STATUS "Install prefix set to: ${CMAKE_INSTALL_PREFIX}")
+
 set(gRPC_INSTALL_BINDIR "bin" CACHE STRING "Installation directory for executables")
 set(gRPC_INSTALL_LIBDIR "lib" CACHE STRING "Installation directory for libraries")
 set(gRPC_INSTALL_INCLUDEDIR "include" CACHE STRING "Installation directory for headers")
