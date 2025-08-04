@@ -21,6 +21,12 @@ cmake_minimum_required(VERSION 3.16)
 
 project(HelloWorld C CXX)
 
+# 获取当前CMakeLists.txt所在目录的上两级目录
+# get_filename_component(PARENT_DIR ${CMAKE_CURRENT_LIST_DIR} DIRECTORY)
+# get_filename_component(GRANDPARENT_DIR ${PARENT_DIR} DIRECTORY)
+# 设置 CMake 查找路径
+set(CMAKE_PREFIX_PATH ${CMAKE_PREFIX_PATH} "G:\\zpg\\gitContent\\z-bacon\\3dParty\\install\\grpc")
+
 include(../cmake/common.cmake)
 
 # Proto file
