@@ -21,6 +21,35 @@ cmake_minimum_required(VERSION 3.16)
 
 project(RouteGuide C CXX)
 
+
+# 宏定义：获取向上N层后进入指定目录的路径
+# 参数：
+#   input_path: 起始路径
+#   up_levels: 向上层数
+#   sub_dir: 目标子目录（如"x/y/z"）
+#   output_var: 输出变量名
+macro(get_relative_path input_path up_levels sub_dir output_var)
+    set(temp_path "${input_path}")
+    # 向上N层
+    foreach(_ RANGE ${up_levels})
+        get_filename_component(temp_path "${temp_path}" DIRECTORY)
+    endforeach()
+    # 拼接子目录
+    get_filename_component(${output_var} "${temp_path}/${sub_dir}" ABSOLUTE)
+endmacro()
+
+# 使用示例
+get_relative_path(${CMAKE_CURRENT_SOURCE_DIR} 4 "3dParty/install/grpc" grpc_path)
+message("目标路径: ${grpc_path}")
+
+# 获取当前CMakeLists.txt所在目录的上两级目录
+# get_filename_component(PARENT_DIR ${CMAKE_CURRENT_LIST_DIR} DIRECTORY)
+# get_filename_component(GRANDPARENT_DIR ${PARENT_DIR} DIRECTORY)
+# 设置 CMake 查找路径
+# set(CMAKE_PREFIX_PATH ${CMAKE_PREFIX_PATH} "G:\\zpg\\gitContent\\z-bacon\\3dParty\\install\\grpc")
+set(CMAKE_PREFIX_PATH ${CMAKE_PREFIX_PATH} ${grpc_path})
+
+
 include(../cmake/common.cmake)
 
 # Find absl package

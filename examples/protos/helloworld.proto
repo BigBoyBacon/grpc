@@ -26,6 +26,9 @@ service Greeter {
   // Sends a greeting
   rpc SayHello (HelloRequest) returns (HelloReply) {}
 
+  // 自定义添加Sends another greeting
+  rpc SayHelloAgain (HelloRequest) returns (HelloReply) {}
+
   rpc SayHelloStreamReply (HelloRequest) returns (stream HelloReply) {}
 
   rpc SayHelloBidiStream (stream HelloRequest) returns (stream HelloReply) {}
